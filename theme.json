@@ -1,0 +1,13 @@
+[
+  {
+    "id": "emerald",
+    "title": "Emerald",
+    "cover": "https://raw.githubusercontent.com/Tokinx/cf-server-monitor-theme-emerald/main/docs/preview.png",
+    "tags": ["Github Pages", "Vercel"],
+    "description": "基于 Vue 3 + Vite + reka-ui + Tailwind CSS v4 构建的 CF Server Monitor主题",
+    "url": "https://github.com/Tokinx/cf-server-monitor-theme-emerald",
+    "preview": "https://raw.githubusercontent.com/Tokinx/cf-server-monitor-theme-emerald/main/docs/preview.png",
+    "author": "Tokinx",
+    "version": "1.0.0"
+  }
+]
