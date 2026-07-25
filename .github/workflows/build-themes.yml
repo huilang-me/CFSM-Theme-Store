@@ -1,0 +1,58 @@
+name: Build Themes
+
+on:
+  push:
+    paths:
+      - 'themes.json'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install jq
+        run: sudo apt-get update && sudo apt-get install -y jq
+
+      - name: Build themes
+        run: bash scripts/build-themes.sh
+
+      - name: Commit and push to dist branch
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+          
+          TMP_DIST=$(mktemp -d)
+          cp -r dist/* "$TMP_DIST/"
+          
+          git branch -D dist 2>/dev/null || true
+          git checkout --orphan dist
+          
+          rm -rf .gitignore
+          git rm -rf . --ignore-unmatch 2>/dev/null || true
+          rm -rf ./* ./.??* 2>/dev/null || true
+          cp -r "$TMP_DIST"/* .
+          
+          git add .
+          
+          if git diff --quiet && git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Update themes dist"
+            git push -f -u origin dist
+          fi
