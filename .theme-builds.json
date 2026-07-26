@@ -4,14 +4,8 @@
     {
       "path": "Tokinx/cf-server-monitor-theme-emerald",
       "url": "https://github.com/Tokinx/cf-server-monitor-theme-emerald",
-      "version": "v1.0.10",
-      "commitid": "c9e1876a76ba8035aa46f1e7f0601b7fa2fc78ee"
-    },
-    {
-      "path": "huilang-me/CF-Server-Monitor-Theme",
-      "url": "https://github.com/huilang-me/CF-Server-Monitor-Theme/",
-      "version": "v2.7.12",
-      "commitid": "3b1e711805be3f296b59d42ae03591dfaf340878"
+      "version": "v1.0.12",
+      "commitid": "c0de04fc77f2df1f29827bd9fee889131f273da7"
     }
   ]
 }
