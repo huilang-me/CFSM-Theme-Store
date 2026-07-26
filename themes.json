@@ -13,18 +13,20 @@
       "url": "https://github.com/Tokinx/cf-server-monitor-theme-emerald",
       "demo": "https://huilang-me.github.io/cf-server-monitor-theme-emerald/",
       "author": "Tokinx",
-      "versions": {
-        "v1.0.10": {
+      "versions": [
+        {
+          "version": "v1.0.10",
           "commitid": "c9e1876a76ba8035aa46f1e7f0601b7fa2fc78ee",
           "releaseDate": "2026-07-25",
           "changelog": "移除页面过渡动画逻辑"
         },
-        "v1.0.9": {
+        {
+          "version": "v1.0.9",
           "commitid": "133274041267451c1a0d13010c78be1648601c37",
           "releaseDate": "2026-07-20",
           "changelog": "调整maps资源位置"
         }
-      }
+      ]
     }
   ]
 }

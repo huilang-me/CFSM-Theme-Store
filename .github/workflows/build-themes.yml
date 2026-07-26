@@ -2,12 +2,18 @@ name: Build Themes
 
 on:
   push:
+    branches:
+      - main
     paths:
       - 'themes.json'
   workflow_dispatch:
 
 permissions:
   contents: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -17,42 +23,115 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          persist-credentials: false
           fetch-depth: 0
 
+      - name: Ensure jq
+        run: |
+          set -euo pipefail
+          if ! command -v jq >/dev/null 2>&1; then
+            sudo apt-get update
+            sudo apt-get install -y jq
+          fi
+
+      - name: Detect theme changes
+        id: changes
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          current_list=$(mktemp)
+          previous_list=$(mktemp)
+          previous_themes=""
+          changed="true"
+
+          bash scripts/build-themes.sh --list themes.json > "$current_list"
+
+          if [[ "${{ github.event_name }}" == "push" ]]; then
+            before="${{ github.event.before }}"
+
+            if [[ -n "$before" && "$before" != "0000000000000000000000000000000000000000" ]] && git cat-file -e "$before:themes.json" 2>/dev/null; then
+              previous_themes="$RUNNER_TEMP/previous-themes.json"
+              git show "$before:themes.json" > "$previous_themes"
+
+              if bash scripts/build-themes.sh --list "$previous_themes" > "$previous_list"; then
+                if cmp -s "$current_list" "$previous_list"; then
+                  changed="false"
+                fi
+              else
+                echo "Previous themes.json is not compatible with the current manifest format. Rebuilding changed themes."
+                previous_themes=""
+              fi
+            fi
+          fi
+
+          echo "changed=$changed" >> "$GITHUB_OUTPUT"
+          echo "previous_themes=$previous_themes" >> "$GITHUB_OUTPUT"
+
+          if [[ "$changed" == "true" ]]; then
+            echo "Theme version changes detected."
+          else
+            echo "No theme version or commit changes detected."
+          fi
+
+      - name: Skip unchanged manifest
+        if: steps.changes.outputs.changed != 'true'
+        run: |
+          echo "No theme version or commit changes detected. Skipping dist sync." >> "$GITHUB_STEP_SUMMARY"
+
       - name: Set up Node.js
+        if: steps.changes.outputs.changed == 'true'
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      - name: Install jq
-        run: sudo apt-get update && sudo apt-get install -y jq
+      - name: Prepare dist branch
+        if: steps.changes.outputs.changed == 'true'
+        id: dist
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
 
-      - name: Build themes
+          dist_dir="$RUNNER_TEMP/dist-worktree"
+          remote_url="https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          rm -rf "$dist_dir"
+
+          if git ls-remote --exit-code --heads "$remote_url" dist >/dev/null 2>&1; then
+            git clone --single-branch --branch dist "$remote_url" "$dist_dir"
+          else
+            git init --initial-branch=dist "$dist_dir"
+            git -C "$dist_dir" remote add origin "$remote_url"
+          fi
+
+          git -C "$dist_dir" config user.name "github-actions[bot]"
+          git -C "$dist_dir" config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git -C "$dist_dir" rev-parse --is-inside-work-tree
+
+          echo "dir=$dist_dir" >> "$GITHUB_OUTPUT"
+
+      - name: Build changed themes
+        if: steps.changes.outputs.changed == 'true'
+        env:
+          DIST_DIR: ${{ steps.dist.outputs.dir }}
+          PREVIOUS_THEMES_FILE: ${{ steps.changes.outputs.previous_themes }}
         run: bash scripts/build-themes.sh
 
-      - name: Commit and push to dist branch
+      - name: Commit and push dist changes
+        if: steps.changes.outputs.changed == 'true'
+        env:
+          DIST_DIR: ${{ steps.dist.outputs.dir }}
         run: |
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "actions@github.com"
-          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
-          
-          TMP_DIST=$(mktemp -d)
-          cp -r dist/* "$TMP_DIST/"
-          
-          git branch -D dist 2>/dev/null || true
-          git checkout --orphan dist
-          
-          rm -rf .gitignore
-          git rm -rf . --ignore-unmatch 2>/dev/null || true
-          rm -rf ./* ./.??* 2>/dev/null || true
-          cp -r "$TMP_DIST"/* .
-          
-          git add .
-          
-          if git diff --quiet && git diff --staged --quiet; then
-            echo "No changes to commit"
+          set -euo pipefail
+
+          git -C "$DIST_DIR" rev-parse --is-inside-work-tree
+          git -C "$DIST_DIR" add -A
+
+          if git -C "$DIST_DIR" diff --cached --quiet; then
+            echo "No dist changes to commit"
+            echo "No dist changes to commit." >> "$GITHUB_STEP_SUMMARY"
           else
-            git commit -m "Update themes dist"
-            git push -f -u origin dist
+            git -C "$DIST_DIR" commit -m "Update themes dist"
+            git -C "$DIST_DIR" push origin HEAD:dist
+            echo "Pushed updated theme dist files." >> "$GITHUB_STEP_SUMMARY"
           fi
