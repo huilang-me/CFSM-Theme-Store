@@ -14,8 +14,14 @@
       "author": "Tokinx",
       "versions": [
         {
-          "version": "v1.0.12",
+          "version": "v1.0.13",
           "commitid": "46f04880f6716470dde5a0d194050b18b1d23b74",
+          "releaseDate": "2026-07-26",
+          "changelog": "更新历史记录时长逻辑以支持多后端聚合"
+        },
+        {
+          "version": "v1.0.12",
+          "commitid": "c0de04fc77f2df1f29827bd9fee889131f273da7",
           "releaseDate": "2026-07-26",
           "changelog": "兼容主题商店"
         }
