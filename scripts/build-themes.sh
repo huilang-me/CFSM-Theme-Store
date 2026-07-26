@@ -265,7 +265,7 @@ while IFS=$'\t' read -r repo_path url version commitid; do
   built_count=$((built_count + 1))
 done <"$current_entries"
 
-find "$DIST_DIR" -mindepth 1 \( -name .git -o -path "$DIST_DIR/.git/*" \) -prune -o -type d -empty -delete
+find "$DIST_DIR" -mindepth 1 -type d -empty ! -path "$DIST_DIR/.git" ! -path "$DIST_DIR/.git/*" -delete
 write_current_metadata "$current_entries"
 
 echo "=== Build process completed: $built_count built, $skipped_count skipped ==="
