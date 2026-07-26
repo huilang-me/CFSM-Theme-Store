@@ -112,7 +112,6 @@ write_current_metadata() {
   local current_entries=$1
   local metadata_entries=$TMP_DIR/metadata.tsv
   local metadata_file=$DIST_DIR/.theme-builds.json
-  local generated_at
 
   : >"$metadata_entries"
 
@@ -123,8 +122,7 @@ write_current_metadata() {
     fi
   done <"$current_entries"
 
-  generated_at=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
-  jq -Rn --arg generatedAt "$generated_at" '
+  jq -Rn '
     [inputs | select(length > 0) | split("\t") | {
       path: .[0],
       url: .[1],
@@ -133,7 +131,6 @@ write_current_metadata() {
     }] as $builds
     | {
       schema: 1,
-      generatedAt: $generatedAt,
       builds: $builds
     }
   ' <"$metadata_entries" >"$metadata_file"

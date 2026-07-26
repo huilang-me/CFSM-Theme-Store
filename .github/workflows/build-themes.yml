@@ -6,6 +6,8 @@ on:
       - main
     paths:
       - 'themes.json'
+      - 'scripts/build-themes.sh'
+      - '.github/workflows/build-themes.yml'
   workflow_dispatch:
 
 permissions:
@@ -42,12 +44,24 @@ jobs:
           current_list=$(mktemp)
           previous_list=$(mktemp)
           previous_themes=""
-          changed="true"
+          changed="false"
 
           bash scripts/build-themes.sh --list themes.json > "$current_list"
 
           if [[ "${{ github.event_name }}" == "push" ]]; then
             before="${{ github.event.before }}"
+            changed_files=$(mktemp)
+
+            if [[ -n "$before" && "$before" != "0000000000000000000000000000000000000000" ]]; then
+              git diff --name-only "$before" "${{ github.sha }}" > "$changed_files"
+            else
+              git ls-tree -r --name-only "${{ github.sha }}" > "$changed_files"
+            fi
+
+            if grep -Eq '^(scripts/build-themes\.sh|\.github/workflows/build-themes\.yml)$' "$changed_files"; then
+              changed="true"
+              echo "Build tooling changed. Running an incremental dist sync."
+            fi
 
             if [[ -n "$before" && "$before" != "0000000000000000000000000000000000000000" ]] && git cat-file -e "$before:themes.json" 2>/dev/null; then
               previous_themes="$RUNNER_TEMP/previous-themes.json"
@@ -55,13 +69,20 @@ jobs:
 
               if bash scripts/build-themes.sh --list "$previous_themes" > "$previous_list"; then
                 if cmp -s "$current_list" "$previous_list"; then
-                  changed="false"
+                  if [[ "$changed" != "true" ]]; then
+                    changed="false"
+                  fi
+                else
+                  changed="true"
                 fi
               else
                 echo "Previous themes.json is not compatible with the current manifest format. Rebuilding changed themes."
+                changed="true"
                 previous_themes=""
               fi
             fi
+          else
+            changed="true"
           fi
 
           echo "changed=$changed" >> "$GITHUB_OUTPUT"
