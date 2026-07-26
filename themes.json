@@ -5,41 +5,19 @@
       "id": "emerald",
       "title": "Emerald",
       "cover": "https://raw.githubusercontent.com/Tokinx/cf-server-monitor-theme-emerald/main/docs/preview.png",
-      "tags": ["Github Pages", "Vercel"],
+      "tags": ["Emerald","Earth"],
       "description": {
         "zh-CN": "翡翠配色的 CF Server Monitor 主题。",
         "en": "An emerald theme for CF Server Monitor."
       },
       "url": "https://github.com/Tokinx/cf-server-monitor-theme-emerald",
-      "demo": "https://huilang-me.github.io/cf-server-monitor-theme-emerald/",
       "author": "Tokinx",
       "versions": [
         {
-          "version": "v1.0.10",
-          "commitid": "c9e1876a76ba8035aa46f1e7f0601b7fa2fc78ee",
-          "releaseDate": "2026-07-25",
-          "changelog": "移除页面过渡动画逻辑"
-        }
-      ]
-    },
-    {
-      "id": "official",
-      "title": "CF Server Monitor Theme",
-      "cover": "",
-      "tags": ["Github Pages", "Vercel"],
-      "description": {
-        "zh-CN": "官方主题",
-        "en": "The official theme for CF Server Monitor."
-      },
-      "url": "https://github.com/huilang-me/CF-Server-Monitor-Theme/",
-      "demo": "https://demo.huilang.me/",
-      "author": "Huilang",
-      "versions": [
-        {
-          "version": "v2.7.12",
-          "commitid": "3b1e711805be3f296b59d42ae03591dfaf340878",
-          "releaseDate": "2026-07-19",
-          "changelog": "同步主题"
+          "version": "v1.0.12",
+          "commitid": "c0de04fc77f2df1f29827bd9fee889131f273da7",
+          "releaseDate": "2026-07-26",
+          "changelog": "兼容主题商店"
         }
       ]
     }
