@@ -1,12 +1,17 @@
 {
   "schema": 1,
-  "generatedAt": "2026-07-26T02:42:34Z",
   "builds": [
     {
       "path": "Tokinx/cf-server-monitor-theme-emerald",
       "url": "https://github.com/Tokinx/cf-server-monitor-theme-emerald",
       "version": "v1.0.10",
       "commitid": "c9e1876a76ba8035aa46f1e7f0601b7fa2fc78ee"
+    },
+    {
+      "path": "Tokinx/cf-server-monitor-theme-emerald",
+      "url": "https://github.com/Tokinx/cf-server-monitor-theme-emerald",
+      "version": "v1.0.9",
+      "commitid": "133274041267451c1a0d13010c78be1648601c37"
     }
   ]
 }
