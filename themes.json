@@ -19,12 +19,27 @@
           "commitid": "c9e1876a76ba8035aa46f1e7f0601b7fa2fc78ee",
           "releaseDate": "2026-07-25",
           "changelog": "移除页面过渡动画逻辑"
-        },
+        }
+      ]
+    },
+    {
+      "id": "official",
+      "title": "CF Server Monitor Theme",
+      "cover": "",
+      "tags": ["Github Pages", "Vercel"],
+      "description": {
+        "zh-CN": "官方主题",
+        "en": "The official theme for CF Server Monitor."
+      },
+      "url": "https://github.com/huilang-me/CF-Server-Monitor-Theme/",
+      "demo": "https://demo.huilang.me/",
+      "author": "Huilang",
+      "versions": [
         {
-          "version": "v1.0.9",
-          "commitid": "133274041267451c1a0d13010c78be1648601c37",
-          "releaseDate": "2026-07-20",
-          "changelog": "调整maps资源位置"
+          "version": "v2.7.12",
+          "commitid": "3b1e711805be3f296b59d42ae03591dfaf340878",
+          "releaseDate": "2026-07-19",
+          "changelog": "同步主题"
         }
       ]
     }
