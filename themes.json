@@ -14,6 +14,12 @@
       "author": "Tokinx",
       "versions": [
         {
+          "version": "v1.0.14",
+          "commitid": "1836f9245abcac54197fddce4ac6b0e4060a6c56",
+          "releaseDate": "2026-07-26",
+          "changelog": "修复世界地图资源路径，添加 GPU 信息解析与显示功能，支持多显卡展示"
+        },
+        {
           "version": "v1.0.13",
           "commitid": "46f04880f6716470dde5a0d194050b18b1d23b74",
           "releaseDate": "2026-07-26",
