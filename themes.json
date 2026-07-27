@@ -14,6 +14,12 @@
       "author": "Tokinx",
       "versions": [
         {
+          "version": "v1.0.15",
+          "commitid": "ab9c41d0df79aeb1cae942cff03d4475a9094ca1",
+          "releaseDate": "2026-07-27",
+          "changelog": "添加内核版本字段到节点信息,优化坐标轴标签并隐藏不必要的指针显示"
+        },
+        {
           "version": "v1.0.14",
           "commitid": "1836f9245abcac54197fddce4ac6b0e4060a6c56",
           "releaseDate": "2026-07-26",
