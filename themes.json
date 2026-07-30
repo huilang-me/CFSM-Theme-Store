@@ -39,6 +39,19 @@
           "changelog": "兼容主题商店"
         }
       ]
+    },
+    {
+      "id": "pulse",
+      "title": "Pulse",
+      "cover": "https://raw.githubusercontent.com/loongkong/cf-server-monitor-theme-pulse/main/docs/preview.svg",
+      "tags": ["Pulse", "Minimal", "Mono"],
+      "description": {
+        "zh-CN": "极简风格的 CF Server Monitor 主题。秒级全局节拍驱动实时数据，卡片/圆环/表格三种模式，支持价格、到期、流量包与剩余价值展示。",
+        "en": "A minimal CF Server Monitor theme. Realtime data on a unified 1s tick, bar/ring/table card modes, with price, expiry, traffic quota and remaining-value display."
+      },
+      "url": "https://github.com/loongkong/cf-server-monitor-theme-pulse",
+      "branch": "main",
+      "author": "loongkong"
     }
   ]
 }
