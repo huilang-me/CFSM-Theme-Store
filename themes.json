@@ -130,6 +130,24 @@
       "url": "https://github.com/Vegas7/CFSM-Theme-AnotherLuminaPlus",
       "branch": "dist",
       "author": "Vegas7"
+    },
+    {
+      "id": "hahaha",
+      "title": "hahaha",
+      "cover": "https://raw.githubusercontent.com/ayingQAQ/cf-monitor-theme-hahaha/main/preview.png",
+      "tags": [
+        "Handwritten",
+        "Paper",
+        "Earth",
+        "Realtime"
+      ],
+      "description": {
+        "zh-CN": "纸张手账风格主题，搭配手写字体、手绘图表和旋转地球。支持国家与分组筛选、多数据源、资源与延迟历史、GPU、磁盘 IO 及明暗外观。",
+        "en": "A paper scrapbook theme with handwritten typography, hand-drawn charts and a rotating globe. Supports country and group filters, multiple backends, resource and latency history, GPU, disk IO, and light/dark appearance."
+      },
+      "url": "https://github.com/ayingQAQ/cf-monitor-theme-hahaha",
+      "branch": "dist",
+      "author": "ayingQAQ"
     }
   ]
 }
