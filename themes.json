@@ -166,6 +166,24 @@
       "url": "https://github.com/huilang-me/CFSM-CRT",
       "branch": "dist",
       "author": "huilang-me"
+    },
+    {
+      "id": "ascii-pond",
+      "title": "锦鲤池塘 · Pond",
+      "cover": "https://raw.githubusercontent.com/ayingQAQ/cf-monitor-ascii-pond/main/previews/overview-light.png",
+      "tags": [
+        "ASCII",
+        "Koi",
+        "Paper",
+        "Realtime"
+      ],
+      "description": {
+        "zh-CN": "字符锦鲤与纸面监控主题，支持游鱼背景、水庭布局、深浅配色、实时数据和合并线路延迟。",
+        "en": "An ASCII koi monitoring theme with ambient and garden layouts, light and dark appearance, realtime metrics and combined latency charts."
+      },
+      "url": "https://github.com/ayingQAQ/cf-monitor-ascii-pond",
+      "branch": "dist",
+      "author": "ayingQAQ"
     }
   ]
 }
