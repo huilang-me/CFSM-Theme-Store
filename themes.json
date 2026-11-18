@@ -184,6 +184,24 @@
       "url": "https://github.com/ayingQAQ/cf-monitor-ascii-pond",
       "branch": "dist",
       "author": "ayingQAQ"
+    },
+    {
+      "id": "luminalite",
+      "title": "LuminaLite",
+      "cover": "https://raw.githubusercontent.com/G1oow/CFSM-Theme-LuminaLite/main/docs/preview.png",
+      "tags": [
+        "LuminaLite",
+        "Cards",
+        "Charts",
+        "Realtime"
+      ],
+      "description": {
+        "zh-CN": "基于 LuminaPlus 数据层、SAO 外观的卡片式主题。大 / 小 / 迷你 / 列表四种视图，六项指标卡与可拖拽分栏的集群状态、实时上下行吞吐曲线，20 × 5 机架热力矩阵，最多 8 条探测线路的延迟与丢包，含价格到期、流量统计与明暗外观。",
+        "en": "A card-based theme that keeps the LuminaPlus data layer with the SAO look. Four layouts (large / compact / mini / list), six metric cards plus a drag-resizable cluster panel with realtime throughput curves, a 20 × 5 rack heatmap, up to 8 latency and loss probes, price, expiry and traffic stats, with light and dark appearance."
+      },
+      "url": "https://github.com/G1oow/CFSM-Theme-LuminaLite",
+      "branch": "dist",
+      "author": "G1oow"
     }
   ]
 }
