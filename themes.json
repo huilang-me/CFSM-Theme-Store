@@ -202,6 +202,26 @@
       "url": "https://github.com/G1oow/CFSM-Theme-LuminaLite",
       "branch": "dist",
       "author": "G1oow"
+    },
+    {
+      "id": "stardew-monitor",
+      "title": "星谷哨站",
+      "cover": "https://raw.githubusercontent.com/howbit/stardew-monitor/main/docs/screenshots/autumn-day.png",
+      "tags": [
+        "Stardew Valley",
+        "Pixel Art",
+        "Farm",
+        "Monitoring",
+        "Realtime",
+        "Dark Mode"
+      ],
+      "description": {
+        "zh-CN": "一款以《星露谷物语》为灵感的像素农场风格服务器监控主题。每台服务器对应一间像素小屋，农场场景随四季、昼夜和当地天气动态变化，夜晚在线节点还会点亮窗灯。支持服务器卡片与列表两种展示方式，可查看 CPU、内存、实时网络流量、流量配额、线路延迟及丢包率，点击节点可查看历史监控曲线。支持多服务器农场传送、季节切换、昼夜切换、动态天气及场景音乐，兼容电脑和手机。",
+        "en": "A pixel-art farm monitoring theme inspired by Stardew Valley. Each server is represented by a cozy pixel cabin, while the farm dynamically changes with the seasons, day and night cycles, and local weather. Online servers light up at night. Features card and list layouts, CPU and memory usage, realtime network traffic, traffic quotas, latency and packet loss monitoring, and historical charts. Also includes multi-server farm teleportation, seasonal and day/night switching, dynamic weather, and immersive background music. Supports both desktop and mobile devices."
+      },
+      "url": "https://github.com/howbit/stardew-monitor",
+      "branch": "dist",
+      "author": "howbit"
     }
   ]
 }
